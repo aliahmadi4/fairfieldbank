@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/master-page}">
+<meta charset="UTF-8">
+<title>Customers</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 10px">
+                <h1 style="color: darkblue">Accounts </h1>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+            <tr class="table-active">
+                <th scope="col">ID</th>
+                <th scope="col">Account No</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Account Type</th>
+                <th scope="col">Balance</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div th:each="account, iterStat:${accounts}">
+                <tr class="table-primary">
+                    <th scope="row" th:text="${account.accountId}">Dark</th>
+                    <td th:text="${account.accountNumber}"></td>
+                    <td th:text="${account.customer.firstName}"></td>
+                    <td th:text="${account.customer.lastName}"></td>
+                    <td th:text="${account.accountType.accountTypeName}"></td>
+                    <td th:text="${account.balance}"></td>
+                </tr>
+            </div>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Pages:</a>
+            </li>
+            <th:block th:each="i:${#numbers.sequence(1,accounts.totalPages)}">
+                <li th:class="${currentPage}==(${i-1}) ? 'page-item active' : 'page-item'">
+                    <a class="page-link" th:href="@{/customers(pageNo=(${i-1}))}" th:text="${i}"></a>
+                </li>
+            </th:block>
+        </ul>
+        </div>
+        <div class="col-md-6">
+            <h3 style="float: right; font-weight: bold">Net Liquidity: $<span th:text="${liquidity}"></span></h3>
+        </div>
+    </div>
+
+</th:block>
+</body>
+</html>

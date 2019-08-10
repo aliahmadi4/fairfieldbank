@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/master-page}">
+<head>
+    <meta charset="UTF-8">
+    <title>New Account</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 10px">
+                <h1 style="color: darkblue">Create New Account </h1>
+            </div>
+
+        </div>
+    </div>
+    <form action="/customer/account/new" method="post" th:object="${account}">
+    <input name="customerId" id="customerId" type="hidden" th:value="${customerId}">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="accountType">Account Type</label>
+                    <select class="form-control" id="accountType" name="accountType">
+                        <option th:value="${acType.accountTypeId}" th:each="acType, iterStat:${accountTypes}" th:text="${acType.accountTypeName}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="accountNumber">Account Number</label>
+                    <input type="number" class="form-control" placeholder="" id="accountNumber"
+                           name="accountNumber" th:value="${account.accountNumber}">
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label" for="balance">Balance</label>
+                    <input type="number" class="form-control" placeholder="" id="balance" name="balance"
+                           th:value="${account.balance}">
+                </div>
+                <button type="submit" class="btn btn-success" style="float: right">Create Acount</button>
+            </div>
+
+        </div>
+
+
+    </form>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/master-page}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 10px">
+                <h1 style="color: darkblue">Create New Account Type </h1>
+            </div>
+
+        </div>
+    </div>
+
+    <form action="/accountType/new" method="post" th:object="${accountType}">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-form-label" for="accountTypeName">Account Type Name</label>
+                    <span th:if="${#fields.hasErrors('accountTypeName')}" th:errors="*{accountTypeName}"
+                          class="badge badge-danger"></span>
+                    <input type="text" class="form-control" placeholder="Default input" id="accountTypeName"
+                           name="accountTypeName" th:value="${accountType.accountTypeName}">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" style="float: right">Save</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    </form>
+
+</th:block>
+</body>
+</html>
